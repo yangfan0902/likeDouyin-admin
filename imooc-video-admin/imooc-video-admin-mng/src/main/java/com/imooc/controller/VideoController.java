@@ -44,11 +44,22 @@ public class VideoController {
 		return "video/addBgm";
 	}
 	
+	@PostMapping("/queryBgmList")
+	@ResponseBody
+	public PagedResult showBgmList(Integer page){
+		return videoService.queryBgmList(page, 10);
+	}
+	
+	@GetMapping("/showBgmList")
+	public String showBgmList(){
+		return "video/bgmList";
+	}
+	
 	@PostMapping("/bgmUpload")
 	@ResponseBody
 	public IMoocJSONResult upload(MultipartFile file) throws Exception {
 		
-		String fileSpace="D:"+File.separator+"imooc_videos_dev"+File.separator+"mvc-bgm";
+		String fileSpace="D:"+File.separator+"imooc_videos_dev";
 		
 		// 保存到数据库中的相对路径
 		String uploadPathDB = File.separator +"bgm";
@@ -92,6 +103,13 @@ public class VideoController {
 	public IMoocJSONResult addBgm(Bgm bgm){
 		videoService.addBgm(bgm);
 		return IMoocJSONResult.ok();
+	}
+	
+	@ResponseBody
+	@PostMapping("/delBgm")
+	public IMoocJSONResult delBgm(String bgmId){
+		videoService.delBgm(bgmId);
+		return IMoocJSONResult.ok("OK");
 	}
 	
 }
