@@ -9,4 +9,8 @@ public interface VideoService {
 	public PagedResult queryBgmList(Integer page,Integer pageSize);
 
 	public void delBgm(String bgmId);
+
+	public PagedResult queryReportList(Integer page, Integer pageSize);
+
+	public void changeStatus(String videoId);
 }

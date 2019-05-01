@@ -60,6 +60,7 @@ var UsersReportsList = function () {
                 { name: 'submitUsername', index: 'submitUsername', width: 20, sortable: false },
                 { name: 'createDate', index: 'createDate', width: 40, sortable: false, hidden: false,
                 	formatter:function(cellvalue, options, rowObject) {
+                		debugger;
                 		var createTime = Common.formatTime(cellvalue,'yyyy-MM-dd HH:mm:ss');
 			    		return createTime;
 			    	}

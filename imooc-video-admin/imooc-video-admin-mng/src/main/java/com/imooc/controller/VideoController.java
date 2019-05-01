@@ -55,6 +55,11 @@ public class VideoController {
 		return "video/bgmList";
 	}
 	
+	@RequestMapping("/showReportList")
+	public String showReportList(){
+		return "video/reportList";
+	}
+	
 	@PostMapping("/bgmUpload")
 	@ResponseBody
 	public IMoocJSONResult upload(MultipartFile file) throws Exception {
@@ -109,6 +114,22 @@ public class VideoController {
 	@PostMapping("/delBgm")
 	public IMoocJSONResult delBgm(String bgmId){
 		videoService.delBgm(bgmId);
+		return IMoocJSONResult.ok("OK");
+	}
+	
+	@ResponseBody
+	@PostMapping("/reportList")
+	public PagedResult queryReportList(Integer page){
+		return videoService.queryReportList(page, 10);
+	}
+	
+	@ResponseBody
+	@PostMapping("/forbidVideo")
+	public IMoocJSONResult queryReportList(String videoId){
+		if(StringUtils.isBlank(videoId)){
+			return IMoocJSONResult.errorMsg("视频id不能为空");
+		}
+		videoService.changeStatus(videoId);
 		return IMoocJSONResult.ok("OK");
 	}
 	
